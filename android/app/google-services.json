@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "960458244240",
+    "project_id": "full-firebase-c1340",
+    "storage_bucket": "full-firebase-c1340.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960458244240:android:b4f41859b6e1266f5c9815",
+        "android_client_info": {
+          "package_name": "com.example.fullfirebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_iULkRukFhfnA355EZhXpSQLRKozF-2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
