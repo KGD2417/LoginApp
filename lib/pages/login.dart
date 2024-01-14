@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fullfirebase/pages/home.dart';
+import 'package:fullfirebase/pages/reset.dart';
 import 'package:fullfirebase/pages/signup.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,12 +31,13 @@ class _LoginPageState extends State<LoginPage> {
           return null;
         });
       } on FirebaseAuthException catch (ex) {
-        return showDialog(
+        showDialog(
             context: context,
-            builder: (BuildContext context) {
+            builder: (context) {
               return AlertDialog(
                 icon: const Icon(Icons.error),
-                title: Text(ex.code.toString()),
+                title: const Text("Error"),
+                content: Text(ex.code.toString()),
               );
             });
       }
@@ -102,9 +104,16 @@ class _LoginPageState extends State<LoginPage> {
                   return null;
                 },
               ),
-
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder:(context)=>ResetPage()));
+                  }, child: Text("Forgot Password?")),
+                ],
+              ),
               const SizedBox(
-                height: 30,
+                height: 10,
               ),
               ElevatedButton(
                 onPressed: () => moveToHome(context),

@@ -32,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
               context: context,
               builder: (BuildContext context) {
                 return const AlertDialog(
-                  icon: Icon(Icons.done_all_rounded),
+                  icon: Icon(Icons.done_outline_rounded),
                   title: Text("Account Created"),
                 );
               });
@@ -43,7 +43,8 @@ class _SignUpPageState extends State<SignUpPage> {
             builder: (BuildContext context) {
               return AlertDialog(
                 icon: const Icon(Icons.error),
-                title: Text(ex.code.toString()),
+                title: const Text("Error"),
+                content: Text(ex.code.toString()),
               );
             });
       }
