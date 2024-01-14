@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fullfirebase/pages/home.dart';
 import 'package:fullfirebase/pages/login.dart';
-import 'package:fullfirebase/uihelper/uihelper.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -21,23 +19,23 @@ class _SignUpPageState extends State<SignUpPage> {
 
   moveToHome(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      UserCredential? userCredential;
+
       try {
+        UserCredential? userCredential;
         userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(
                 email: emailMain, password: passMain)
             .then((value) {
-          Navigator.pushReplacement(context as BuildContext,
-              MaterialPageRoute(builder: (context) => LoginPage()));
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const LoginPage()));
           return showDialog(
               context: context,
               builder: (BuildContext context) {
-                return AlertDialog(
-                  icon: const Icon(Icons.done_all_rounded),
+                return const AlertDialog(
+                  icon: Icon(Icons.done_all_rounded),
                   title: Text("Account Created"),
                 );
               });
-          return null;
         });
       } on FirebaseAuthException catch (ex) {
         return showDialog(
@@ -56,7 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up Page"),
+        title: const Text("Sign Up Page"),
         centerTitle: true,
       ),
       body: Padding(
@@ -72,7 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                     hintText: "Enter Your Email",
                     labelText: "Email",
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: const Icon(Icons.email),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     )),
@@ -86,7 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 
@@ -97,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 decoration: InputDecoration(
                     hintText: "Enter Your Password",
                     labelText: "Password",
-                    prefixIcon: Icon(Icons.password),
+                    prefixIcon: const Icon(Icons.password),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     )),
@@ -113,11 +111,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 },
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ElevatedButton(
-                child: const Text("SignUp"),
                 onPressed: () {
                   moveToHome(context);
                 },
@@ -128,15 +125,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     textStyle:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                child: const Text("SignUp"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Already have an Account?",
                     style: TextStyle(fontSize: 16),
                   ),
@@ -145,10 +143,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()),
+                                builder: (context) => const LoginPage()),
                             (route) => false);
                       },
-                      child: Text(
+                      child: const Text(
                         "Log In",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),

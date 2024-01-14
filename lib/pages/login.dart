@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fullfirebase/pages/home.dart';
 import 'package:fullfirebase/pages/signup.dart';
-import 'package:fullfirebase/uihelper/uihelper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -20,15 +19,17 @@ class _LoginPageState extends State<LoginPage> {
   String passMain = "";
 
   moveToHome(BuildContext context) async {
-    if(_formKey.currentState!.validate()){
+    if (_formKey.currentState!.validate()) {
       UserCredential? userCreds;
-      try{
-        userCreds=await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailMain, password: passMain).then((value){
-          Navigator.pushReplacement(context as BuildContext,
-              MaterialPageRoute(builder: (context) => HomePage()));
+      try {
+        userCreds = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: emailMain, password: passMain)
+            .then((value) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const HomePage()));
+          return null;
         });
-      }
-      on FirebaseAuthException catch(ex){
+      } on FirebaseAuthException catch (ex) {
         return showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login Page"),
+        title: const Text("Login Page"),
         centerTitle: true,
       ),
       body: Padding(
@@ -54,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
           key: _formKey,
           child: Column(
             children: [
-
               //Email Controller
               TextFormField(
                 controller: emailController,
@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                     hintText: "Enter Your Email",
                     labelText: "Email",
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: const Icon(Icons.email),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     )),
@@ -76,11 +76,9 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
 
-
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-
 
               //Pass Controller
               TextFormField(
@@ -89,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: InputDecoration(
                     hintText: "Enter Your Password",
                     labelText: "Password",
-                    prefixIcon: Icon(Icons.password),
+                    prefixIcon: const Icon(Icons.password),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                     )),
@@ -105,12 +103,10 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
 
-
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ElevatedButton(
-                child: const Text("Login"),
                 onPressed: () => moveToHome(context),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.deepPurple,
@@ -118,19 +114,33 @@ class _LoginPageState extends State<LoginPage> {
                     minimumSize: const Size(150, 45),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
-                    textStyle:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    textStyle: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold)),
+                child: const Text("Login"),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an Account?",style: TextStyle(fontSize: 16),),
-                  TextButton(onPressed: (){ 
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SignUpPage()), (route) => false);
-                  }, child: Text("Sign Up",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),))
+                  const Text(
+                    "Don't have an Account?",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage()),
+                            (route) => false);
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ))
                 ],
               )
             ],
